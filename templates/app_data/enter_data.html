@@ -7,9 +7,35 @@
 {% endblock %}
 
 {% block pagecontent %}
+{% if messages %}
+<div class="text-center">
+    {% for message in messages %}
+    {% if message.tags == 'error' %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% else %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
 <div class="row">
     <div class="col-md-12">
         <h1 class="text-primary">Registrar Secuencia</h1>
+    </div>
+    <div class="form-control">
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ form.identificator }}
+            {{ form.name }}
+            {{ form.description }}
+            {{ form.sequence }}
+            {{ form.image }}
+            <button type="submit" name="register_organism" class="btn btn-success">Registrar</button>
+        </form>
     </div>
 </div>
 {% endblock %}
