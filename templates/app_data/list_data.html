@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Actualizar Datos{% endblock %}
 
-{% block css %}
+{% block customcss %}
+<link href='{% static "css/list_data.css" %' rel="stylesheet">
 {% endblock %}
 
 {% block pagecontent %}
@@ -79,7 +81,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 {% if organism.image %}
-                                <img src="{{ organism.image.url }}" alt="{{ organism.name }}" loading="lazy"
+                                <img class="organism_image" src="{{ organism.image.url }}" alt="{{ organism.name }}" loading="lazy"
                                     class="img-responsive">
                                 {% else %}
                                 <p>No existe imagen para este organismo.</p>
