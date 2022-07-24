@@ -29,10 +29,10 @@
     <div class="form-control">
         <form enctype="multipart/form-data" method="post">
             {% csrf_token %}
-            {{ form.identificator }}
             {{ form.name }}
-            {{ form.description }}
+            {{ form.header}}
             {{ form.sequence }}
+            {{ form.description }}
             {{ form.image }}
             <button type="submit" name="register_organism" class="btn btn-success">Registrar</button>
         </form>

@@ -12,10 +12,12 @@ def enter_data(request):
         organism = Organism()
         form = RegisterOrganismForm(request.POST, request.FILES)
         if form.is_valid():
-            if Organism.objects.filter(identificator=request.POST["identificator"]).exists():
+            ident = form.cleaned_data["header"].split('|')[1]
+            if Organism.objects.filter(identificator=ident).exists():
                 messages.error(request, "Identificador ya existe")
                 return redirect("app_data:enter-data")
-            organism.identificator = form.cleaned_data["identificator"]
+            organism.identificator = ident
+            organism.header= form.cleaned_data["header"]
             organism.name = form.cleaned_data["name"]
             organism.description = form.cleaned_data["description"]
             organism.sequence = form.cleaned_data["sequence"].upper()
@@ -44,7 +46,9 @@ def update_organism(request, identificator, action):
     if action == 'update' or flag_exists:
         organism = Organism.objects.get(identificator=identificator)
         if 'update_organism' in request.POST:
-            organism.identificator = request.POST["identificator"]
+            ident = request.POST["header"].split('|')[1]
+            organism.identificator = ident
+            organism.header = request.POST["header"]
             organism.name = request.POST["name"]
             organism.description = request.POST["description"]
             organism.sequence = request.POST["sequence"].upper()

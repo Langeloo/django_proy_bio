@@ -3,15 +3,15 @@ from django import forms
 
 
 class RegisterOrganismForm(forms.Form):
-    identificator = forms.IntegerField(
-        max_value=999999999999999,
-        required=True,
-        widget=forms.NumberInput(attrs={"class": "form-control", "placeholder": "Ingrese el identificador"}),
-    )
     name = forms.CharField(
         max_length=100,
         required=True,
         widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Ingrese el nombre"}),
+    )
+    header = forms.CharField(
+        max_length=250,
+        required=True,
+        widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Ingrese el encabezado"}),
     )
     description = forms.CharField(
         max_length=500,

@@ -14,12 +14,12 @@
     <div class="form-control">
         <form enctype="multipart/form-data" method="post">
             {% csrf_token %}
-            <input class="form-control" type="text" placeholder="Ingrese el identificador"
-                value="{{organism.identificator | stringformat:'i'}}" name="identificator" id="identificator" required>
             <input class="form-control" type="text" placeholder="Ingrese el nombre" maxlength="30"
-                value="{{organism.name}}" name="name" id="name" required>
+            value="{{organism.name}}" name="name" id="name" required>
             <input class="form-control" type="text" placeholder="Ingrese la descripcion" maxlength="500"
-                value="{{organism.description}}" name="description" id="description" required>
+            value="{{organism.description}}" name="description" id="description" required>
+            <input class="form-control" type="text" placeholder="Ingrese encabezado"
+                value="{{organism.header}}" name="header" id="header" required>
             <input class="form-control" type="text" placeholder="Ingrese la secuencia" maxlength="60"
                 value="{{organism.sequence}}" name="sequence" id="sequence" required>
             <input class="form-control" type="file" placeholder="Carque aqui su imagen" accept=".jpg" name="image">
