@@ -17,10 +17,10 @@ def enter_data(request):
                 messages.error(request, "Identificador ya existe")
                 return redirect("app_data:enter-data")
             organism.identificator = ident
-            organism.header= form.cleaned_data["header"]
             organism.name = form.cleaned_data["name"]
-            organism.description = form.cleaned_data["description"]
+            organism.header= form.cleaned_data["header"]
             organism.sequence = form.cleaned_data["sequence"].upper()
+            organism.description = form.cleaned_data["description"]
             try:
                 organism.image = request.FILES["image"]
                 organism.image.name = "{}.jpg".format(organism.identificator)

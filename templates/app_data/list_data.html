@@ -22,7 +22,7 @@
 </div>
 {% endif %}
 <div class="row">
-    <div class="col-md-12">
+    <div class="d-flex col-md-12 justify-content-center">
         <h1 class="text-primary">Lista de Secuencias</h1>
     </div>
 </div>
@@ -30,14 +30,14 @@
 <div class="organism-list">
     <form method="post">
         {% csrf_token %}
-        <div class="accordion accordion-flush" id="accordionFlushOrganism">
+        <div class="accordion" id="accordionFlushOrganism">
             {% for organism in organisms %}
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-heading{{ organism.identificator }}">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#flush-collapse{{ organism.identificator }}" aria-expanded="false"
                         aria-controls="flush-collapse{{ organism.identificator }}">
-                        Organismo {{ organism.name }}
+                        {{organism.identificator}} - {{ organism.name }}
                     </button>
                 </h2>
                 <div id="flush-collapse{{ organism.identificator }}" class="accordion-collapse collapse"
@@ -46,41 +46,46 @@
                     <div class="accordion-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2 class="text-primary">{{ organism.identificator }}</h2>
+                                <h3 class="text-info">Nombre del Organismo</h3>
+                                <p>{{ organism.name }}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h2 class="text-primary">{{ organism.name }}</h2>
+                                <h3 class="text-info">Identificador</h3>
+                                <p>{{ organism.identificator }}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h2 class="text-primary">{{ organism.header }}</h2>
+                                <h3 class="text-info">Encabezado</h3>
+                                <p>{{ organism.header }}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <p>{{ organism.description }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h3 class="text-primary">Secuencia</h3>
-                            <div class="col-md-12">
+                                <h3 class="text-info">Secuencia</h3>
                                 <p>{{ organism.sequence }}</p>
                             </div>
                         </div>
                         <div class="row">
-                            <h3 class="text-primary">Longitud Secuencia</h3>
                             <div class="col-md-12">
+                                <h3 class="text-info">Descripcion</h3>
+                                <p>{{ organism.description }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="text-info">Longitud de la Secuencia</h3>
                                 <p>{{ organism.length_secuence }}</p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
+                                <h3 class="text-info">Imagen</h3>
                                 {% if organism.image %}
-                                <img src="{{ organism.image.url }}" alt="{{ organism.name }}" height="400px" loading="lazy"
-                                    class="img-responsive">
+                                <img src="{{ organism.image.url }}" alt="{{ organism.name }}" height="400px"
+                                    loading="lazy" class="img-responsive">
                                 {% else %}
                                 <p>No existe imagen para este organismo.</p>
                                 {% endif %}
