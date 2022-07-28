@@ -1,4 +1,5 @@
 {%load static%}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -36,14 +37,50 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link active dropdown-toggle py-0" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                Secuencias
+                                {% trans 'Secuencias' %}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{% url 'app_data:enter-data' %}">Registrar</a></li>
-                                <li><a class="dropdown-item" href="{% url 'app_data:list-data' %}">Lista</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'app_data:enter-data' %}">
+                                        {% trans 'Registrar' %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'app_data:list-data' %}">
+                                        {% trans 'Lista' %}
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
+                </div>
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as lang %}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {% if LANGUAGE_CODE == 'es' %}
+                        <img src="https://img.icons8.com/color/96/000000/spain-circular.png" height="24" />
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item" href="/en/">
+                                <img src="https://img.icons8.com/color/96/000000/usa-circular.png" height="24" />
+                            </a>
+                        </li>
+                    </ul>
+                    {% elif LANGUAGE_CODE == 'en' %}
+                    <img src="https://img.icons8.com/color/96/000000/usa-circular.png" height="24" />
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li>
+                            <a class="dropdown-item" href="/es/">
+                                <img src="https://img.icons8.com/color/96/000000/spain-circular.png" height="24" />
+                            </a>
+                        </li>
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
         </nav>
@@ -61,6 +98,7 @@
                 <p class="text-white text-center m-0">&copy; Copyright 2022. Diseñado por Miguel Ramirez & Daniel López
                     |
                     Bogotá D.C - Colombia</p>
+                <a target="_blank" href="https://icons8.com/icon/MRQWA3gxIrCt/spain"></a>
             </div>
         </div>
     </footer>
