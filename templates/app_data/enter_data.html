@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Registrar Datos{% endblock %}
 
-{% block css %}
-
+{% block customcss %}
+<link href="{% static 'css/enter_data.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block pagecontent %}
@@ -59,8 +60,8 @@
                 <div class="col-md-12">
                     {{ form.image }}
                 </div>
-                <div class="d-flex col-md-12 justify-content-end">
-                    <button type="submit" name="register_organism" class="btn btn-success">Registrar</button>
+                <div class="d-flex col-md-12 justify-content-start">
+                    <button type="submit" name="register_organism" class="btn btn-sm btn-success">Registrar</button>
                 </div>
             </div>
         </form>

@@ -80,8 +80,8 @@
                                     <div class="col-md-12">
                                         <h3 class="text-info mb-3">Imagen</h3>
                                         {% if organism.image %}
-                                        <img class="img-fluid mb-3 organism_image mx-auto d-block" src="{{ organism.image.url }}"
-                                            alt="{{ organism.name }}" loading="lazy">
+                                        <img class="img-fluid mb-3 organism_image mx-auto d-block"
+                                            src="{{ organism.image.url }}" alt="{{ organism.name }}" loading="lazy">
                                         {% else %}
                                         <p>No existe imagen para este organismo.</p>
                                         {% endif %}
@@ -90,13 +90,14 @@
                             </div>
                             <hr>
                             <div class="col-md-12">
-                                <button class="btn btn-danger float-right" type="submit" name="delete"
-                                    value="{{organism.pk}}">Eliminar
-                                    Organismo</button>
-                                <a class="btn btn-primary float-right"
+                                <a class="btn btn-sm btn-primary me-2"
                                     href="{% url 'app_data:update-organism' identificator=organism.identificator action='update' %}">Actualizar
                                     Organismo
                                 </a>
+                                <button class="btn btn-sm btn-danger" type="submit" name="delete"
+                                    value="{{organism.pk}}">
+                                    Eliminar Organismo
+                                </button>
                             </div>
                         </div>
                     </div>
