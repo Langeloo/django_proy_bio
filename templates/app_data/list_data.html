@@ -78,9 +78,9 @@
                                         <p class="text-break font-monospace">{{ organism.identificator }}</p>
                                     </div>
                                     <div class="col-md-12">
-                                        <h3 class="text-info">Imagen</h3>
+                                        <h3 class="text-info mb-3">Imagen</h3>
                                         {% if organism.image %}
-                                        <img class="img-fluid mb-3" src="{{ organism.image.url }}"
+                                        <img class="img-fluid mb-3 organism_image mx-auto d-block" src="{{ organism.image.url }}"
                                             alt="{{ organism.name }}" loading="lazy">
                                         {% else %}
                                         <p>No existe imagen para este organismo.</p>
