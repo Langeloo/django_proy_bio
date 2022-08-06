@@ -47,59 +47,58 @@
                     data-bs-parent="#accordionFlushOrganism">
                     <div class="accordion-body">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="text-info">Nombre del Organismo</h3>
+                                        <p class="text-break font-monospace">{{ organism.name }}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3 class="text-info">Encabezado</h3>
+                                        <p class="text-break font-monospace">{{ organism.header }}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3 class="text-info">Secuencia</h3>
+                                        <p class="text-break font-monospace">{{ organism.sequence }}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3 class="text-info">Descripcion</h3>
+                                        <p class="text-break font-monospace">{{ organism.description }}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3 class="text-info">Longitud de la Secuencia</h3>
+                                        <p class="text-break font-monospace">{{ organism.length_secuence }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3 class="text-info">Identificador</h3>
+                                        <p class="text-break font-monospace">{{ organism.identificator }}</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h3 class="text-info">Imagen</h3>
+                                        {% if organism.image %}
+                                        <img class="img-fluid mb-3" src="{{ organism.image.url }}"
+                                            alt="{{ organism.name }}" loading="lazy">
+                                        {% else %}
+                                        <p>No existe imagen para este organismo.</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="col-md-12">
-                                <h3 class="text-info">Nombre del Organismo</h3>
-                                <p>{{ organism.name }}</p>
+                                <button class="btn btn-danger float-right" type="submit" name="delete"
+                                    value="{{organism.pk}}">Eliminar
+                                    Organismo</button>
+                                <a class="btn btn-primary float-right"
+                                    href="{% url 'app_data:update-organism' identificator=organism.identificator action='update' %}">Actualizar
+                                    Organismo
+                                </a>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-info">Identificador</h3>
-                                <p>{{ organism.identificator }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-info">Encabezado</h3>
-                                <p>{{ organism.header }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-info">Secuencia</h3>
-                                <p>{{ organism.sequence }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-info">Descripcion</h3>
-                                <p>{{ organism.description }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-info">Longitud de la Secuencia</h3>
-                                <p>{{ organism.length_secuence }}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="text-info">Imagen</h3>
-                                {% if organism.image %}
-                                <img src="{{ organism.image.url }}" alt="{{ organism.name }}" loading="lazy"
-                                    class="img-responsive organism_image">
-                                {% else %}
-                                <p>No existe imagen para este organismo.</p>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <hr>
-                        <button class="btn btn-danger float-right" type="submit" name="delete"
-                            value="{{organism.pk}}">Eliminar
-                            Organismo</button>
-                        <a class="btn btn-primary float-right"
-                            href="{% url 'app_data:update-organism' identificator=organism.identificator action='update' %}">Actualizar
-                            Organismo</a>
                     </div>
                 </div>
             </div>
