@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #installed apps
     'app_data',
+    'app_align',
 ]
 
 MIDDLEWARE = [
