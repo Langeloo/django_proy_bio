@@ -4,65 +4,247 @@
 {% block title %}Alineamientos{% endblock %}
 
 {% block customcss %}
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<link href="{% static 'css/app_align/align.css' %}" rel="stylesheet">
+<script>
+    function inner_id() {
+        console.log(document.getElementById('list_organism').value);
+        document.getElementById('seq_fasta1').value = document.getElementById('list_organism').value;
+        document.getElementById('lower_fasta1').disabled = false;
+        document.getElementById('upper_fasta1').disabled = false;
+        document.getElementById('upper_fasta1').max = document.getElementById('list_organism').value.length;
+    }
+
+    function inner_ids() {
+        console.log(document.getElementById('list_organism2').value);
+        document.getElementById('seq_fasta2').value = document.getElementById('list_organism2').value;
+        document.getElementById('lower_fasta2').disabled = false;
+        document.getElementById('upper_fasta2').disabled = false;
+        document.getElementById('upper_fasta2').max = document.getElementById('list_organism2').value.length;
+    }
+
+    function enable_disable() {
+        if (document.getElementById('Radios1').checked == true) {
+            document.getElementById('seq_manual1').disabled = true;
+            document.getElementById('list_organism2').disabled = true;
+            document.getElementById('fasta2').disabled = false;
+        }
+        else if (document.getElementById('Radios2').checked == true) {
+            document.getElementById('seq_manual1').disabled = false;
+            document.getElementById('list_organism2').disabled = true;
+            document.getElementById('fasta2').disabled = true;
+        }
+        else if (document.getElementById('Radios3').checked == true) {
+            document.getElementById('seq_manual1').disabled = true;
+            document.getElementById('list_organism2').disabled = false;
+            document.getElementById('fasta2').disabled = true;
+        }
+    }
+</script>
+<script src="{% static 'js/app_align/slider.js' %}"></script>
+<script src="{% static 'js/app_align/fasta.js' %}"></script>
+<py-script src="{% static 'py/fasta.py' %}"></py-script>
 {% endblock %}
 
 {% block pagecontent %}
-<div class="row">
-    <div class="col-md-6">
-        <div class="d-flex row justify-content-start">
-            <div class="col-md-8">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <button class="nav-link active" id="graphic-tab" data-bs-toggle="tab"
-                            data-bs-target="#graphic-tab-pane" type="button" role="tab" aria-controls="graphic-tab-pane"
-                            aria-selected="true">
-                            Manual
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" id="twoPhase-tab" data-bs-toggle="tab"
-                            data-bs-target="#twoPhase-tab-pane" type="button" role="tab"
-                            aria-controls="graphic-tab-pane" aria-selected="true">
-                            Fasta
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="graphic-tab-pane" role="tabpanel"
-                        aria-labelledby="graphic-tab">
-                        <div class="row mt-3">
-                            <div class="d-flex col-md-12 justify-content-center">
-                                <form action="" class=" needs-validation">
-                                    <div class="row g-3">
-                                        <div class="col-md-12">
-                                            <div class="input-group input-group-sm">
-                                                <input id="" class="form-control form-control-sm" type="text"
-                                                    placeholder="Secuencia" maxlength="60"
-                                                    onkeypress="return validarBases(event)" required />
-                                                <span id="count1" class="input-group-text text-danger">0</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="twoPhase-tab-pane" role="tabpanel" aria-labelledby="twoPhase-tab">
-                        <h3>Mundo</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="text-center">
+    <div class="alert alert-info">
+        <strong>¡Bienvenido!</strong> Cargue solo archivos con extension .fasta.<br>
+        <strong>¡Importante!</strong> Para el alineamiento local debe ingresar los valores en los slider.
     </div>
-    <div class="col-md-6">
+</div>
+<h1 class="text-primary text-center">FASTA</h1>
+<div class="row justify-content-center">
+    <div class="col-md-5 mx-1">
+        <h2 class="text-primary text-center">Organismo 1</h2>
+        <br>
+        <label for="FormControlFile1">Seleccione el organismo 1</label>
+        <select class="form-select" aria-label="Default select example" onChange="inner_id();" id="list_organism">
+            <option selected>Seleccione el organismo...</option>
+            {% for organism in organisms %}
+            <option value="{{ organism.sequence }}">{{ organism.identificator }} - {{ organism.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <!--Alert sequence 2-->
+        <div class="text-center">
+            <div class="alert alert-success">
+                <p id="alert_seq1_fasta1">Sin Datos</p>
+                <h5>Secuencia:</h5>
+                <input class="form-control" type="text" id="seq_fasta1" value="Sin Datos" disabled>
+            </div>
+        </div>
+        <span class="multi-range">
+            <input type="range" min="1" max="59" value="1" id="lower_fasta1" disabled>
+            <input type="range" min="2" max="60" id="upper_fasta1" disabled>
+        </span>
+        <br><br>
+        <!--
+        <label for="lower_fasta1">Valor minimo: </label>
+        <label class="first-range-value" for="lower_fasta1" id="labellower_fasta1">1</label>
+        <label for="upper_fasta1">Valor maximo: </label>
+        <label class="last-range-value" for="upper_fasta1" id="labelupper_fasta1">60</label>
+        -->
+    </div>
+    <div class="col-md-5 mx-1">
+        <h2 class="text-primary text-center">Secuencia 2</h2>
+        <br>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="Radios1" onChange="enable_disable();"
+                checked>
+            <label class="form-check-label" for="exampleRadios1">
+                Alineamiento Fasta
+                <br>
+                <label for="FormControlFile2">Ingrese el archivo 2</label>
+                <input type="file" id="fasta_2" accept=".fasta" class="form-control-file">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="Radios2" onChange="enable_disable();">
+            <label class="form-check-label" for="exampleRadios2">
+                Alineamiento Manual
+                <br>
+                <label for="FormControlFile2">Ingrese manualmente la Secuencia</label>
+                <input class="form-control" type="text" id="seq_manual1" value="Sin Datos" disabled>
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="Radios3" onChange="enable_disable();">
+            <label class="form-check-label" for="exampleRadios3">
+                Alineamiento Base de datos
+                <br>
+                <select class="form-select" aria-label="Default select example" onChange="inner_ids();"
+                    id="list_organism2" disabled>
+                    <option selected>Seleccione el organismo...</option>
+                    {% for organism in organisms %}
+                    <option value="{{ organism.sequence }}">{{ organism.identificator }} - {{ organism.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+        <br>
+        <div class="text-center">
+            <div class="alert alert-success">
+                <p id="alert_seq2_fasta2">Sin Datos</p>
+                <h5>Secuencia:</h5>
+                <input class="form-control" type="text" id="seq_fasta2" value="Sin Datos" disabled>
+            </div>
+        </div>
+        <span class="multi-range">
+            <input type="range" min="1" max="59" value="1" id="lower_fasta2" disabled>
+            <input type="range" min="2" max="60" id="upper_fasta2" disabled>
+        </span>
+        <br><br>
+        <!--
+        <label for="lower_fasta2">Valor minimo: </label>
+        <label class="first-range-value" for="lower_fasta2" id="labellower_fasta2">1</label>
+        <label for="upper">Valor maximo: </label>
+        <label class="last-range-value" for="upper_fasta2" id="labelupper_fasta2">60</label>
+        -->
+    </div>
+</div>
+<div class="row m-4 justify-content-center">
+    <div class="text-center mx-1">
+        <button class="btn btn-primary" id="global_aling_fasta" type="submit" pys-onClick="gl_aling_fasta">
+            Alineamiento
+            Global</button>
+        <button class="btn btn-primary" id="local_aling_fasta" pys-onClick="lc_aling_fasta">
+            Alineamiento
+            Local</button>
+    </div>
+</div>
 
+
+
+
+<h2 class="text-primary text-center">Resultado Global</h2>
+<div class="table-responsive">
+    <table class="table table-bordered text-center">
+        <tr id="table_headfasta">
+        </tr>
+        <tr id="table_bodyfasta">
+        </tr>
+        <tr id="table_footerfasta">
+        </tr>
+    </table>
+</div>
+<br><br>
+<div class="row text-center">
+    <div class="col-md-4">
+        <h4 id="global_similarityfasta"></h4>
+    </div>
+    <div class="col-md-4">
+        <h4 id="len1_seq1fasta"></h4>
+    </div>
+    <div class="col-md-4">
+        <h4 id="len1_seq2fasta"></h4>
+    </div>
+</div>
+<br><br>
+<div class="table-responsive" id="local_datafasta">
+</div>
+<h2 class="text-primary text-center">Resultado Local</h2>
+<div class="table-responsive" id="result_local">
+    <table class="table table-bordered text-center">
+        <tr id="table_head_localfasta">
+        </tr>
+        <tr id="table_body_localfasta">
+        </tr>
+        <tr id="table_footer_localfasta">
+        </tr>
+    </table>
+</div>
+<br><br>
+<div class="row text-center">
+    <div class="col-md-4">
+        <h4 id="local_similarityfasta"></h4>
+    </div>
+    <div class="col-md-4">
+        <h4 id="len2_seq1fasta"></h4>
+    </div>
+    <div class="col-md-4">
+        <h4 id="len2_seq2fasta"></h4>
     </div>
 </div>
 {% endblock %}
+<script src="{% static 'js/app_align/slider.js' %}"></script>
+<script src="{% static 'js/app_align/fasta.js' %}"></script>
+<script>
+    function inner_id() {
+        console.log(document.getElementById('list_organism').value);
+        document.getElementById('seq_fasta1').value = document.getElementById('list_organism').value;
+        document.getElementById('lower_fasta1').disabled = false;
+        document.getElementById('upper_fasta1').disabled = false;
+        document.getElementById('upper_fasta1').max = document.getElementById('list_organism').value.length;
+    }
 
+    function inner_ids() {
+        console.log(document.getElementById('list_organism2').value);
+        document.getElementById('seq_fasta2').value = document.getElementById('list_organism2').value;
+        document.getElementById('lower_fasta2').disabled = false;
+        document.getElementById('upper_fasta2').disabled = false;
+        document.getElementById('upper_fasta2').max = document.getElementById('list_organism2').value.length;
+    }
+
+    function enable_disable() {
+        if (document.getElementById('Radios1').checked == true) {
+            document.getElementById('seq_manual1').disabled = true;
+            document.getElementById('list_organism2').disabled = true;
+            document.getElementById('fasta2').disabled = false;
+        }
+        else if (document.getElementById('Radios2').checked == true) {
+            document.getElementById('seq_manual1').disabled = false;
+            document.getElementById('list_organism2').disabled = true;
+            document.getElementById('fasta2').disabled = true;
+        }
+        else if (document.getElementById('Radios3').checked == true) {
+            document.getElementById('seq_manual1').disabled = true;
+            document.getElementById('list_organism2').disabled = false;
+            document.getElementById('fasta2').disabled = true;
+        }
+    }
+</script>
+<py-script src="{% static 'py/fasta.py' %}"></py-script>
 {% block customjs %}
 {% endblock %}
