@@ -32,7 +32,7 @@
 
 {% if organisms %}
 <div id="accordion_search_bar_container">
-    <input type="search" id="accordion_search_bar" placeholder="Buscar..." />
+    <input type="search" id="accordion_search_bar" placeholder="Buscar..." autocomplete="off"/>
 </div>
 <form method="post">
     {% csrf_token %}

@@ -56,9 +56,9 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-md-5 mx-1">
-        <h2 class="h3 text-primary text-center">Alineamiento</h2>
-        <br>
-        <div class="radio_1_container">
+        <h2 class="h3 text-primary text-center">Alineamientos</h2>
+        <br><br>
+        <div class="radio_1_container text-center">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="manual_radio"
                     value="option1">
@@ -69,22 +69,26 @@
                 <label class="form-check-label" for="fasta_radio">Carga FASTA</label>
             </div>
         </div>
+        <br>
         <div class="alert_select" id="alert_select">
             <div class="alert alert-danger">
                 <strong>¡Importante!</strong> Seleccione una de las opciones.
             </div>
         </div>
         <div class="input_cont">
-            <input class="form-control" type="text" placeholder="Ingrese la secuencia..." id="manual_input">
-            <input class="form-control" type="file" name="fasta" id="fasta_input" accept=".fasta">
+            <input class="form-control" type="text" placeholder="Ingrese la secuencia..." id="manual_input"
+                style="display:none;">
+            <input class="form-control" type="file" name="fasta" id="fasta_input" accept=".fasta" style="display:none;">
         </div>
         <br>
         <!--Alert sequence 2-->
-        <div class="text-center">
-            <div class="alert alert-success">
-                <p id="alert_seq1_fasta1">Sin Datos</p>
-                <h5>Secuencia:</h5>
-                <input class="form-control" type="text" id="seq_fasta1" value="Sin Datos" disabled>
+        <div id="data1_input" style="display:none;">
+            <div class="text-center">
+                <div class="alert alert-success">
+                    <p id="alert_seq1_fasta1">Sin Datos</p>
+                    <h5>Secuencia:</h5>
+                    <input class="form-control" type="text" id="seq_fasta1" value="Sin Datos" disabled>
+                </div>
             </div>
         </div>
         <br><br>
@@ -95,10 +99,11 @@
         <label class="last-range-value" for="upper_fasta1" id="labelupper_fasta1">60</label>
         -->
     </div>
-    <div class="col-md-5 mx-1">
+    <div class="col-md-5 mx-1" id="config_align_container" style="display:none;">
         <h2 class="h3 text-primary text-center">Configuracion del Alineamiento</h2>
         <br>
-        <div class="radio_2_container">
+        <br>
+        <div class="radio_2_container text-center">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="bd_radio" value="option1">
                 <label class="form-check-label" for="bd_radio">Comparar con base de datos</label>
@@ -108,12 +113,13 @@
                 <label class="form-check-label" for="seq_radio">Comparar con una secuencia</label>
             </div>
         </div>
+        <br>
         <div class="alert_select2" id="alert_select2">
             <div class="alert alert-danger">
                 <strong>¡Importante!</strong> Seleccione una de las opciones.
             </div>
         </div>
-        <div id="bd_choice">
+        <div id="bd_choice" style="display: none;">
             <div id="bd_slider">
                 <span class="multi-range">
                     <input type="range" min="1" max="59" value="1" id="bd_slider1_min">
@@ -126,7 +132,7 @@
                 </span>
             </div>
             <br><br><br>
-            <div class="justify-content-center" id="bd_buttons">
+            <div class="text-center" id="bd_buttons">
                 <button class="btn btn-primary" id="bd_btn_global">Alineamiento Global</button>
                 <button class="btn btn-primary" id="bd_btn_local">Alineamiento Local</button>
             </div>
@@ -157,7 +163,7 @@
                 </span>
             </div>
             <br><br><br>
-            <div id="seq_buttons">
+            <div class="text-center" id="seq_buttons">
                 <button class="btn btn-primary" id="seq_btn_global">Alineamiento Global</button>
                 <button class="btn btn-primary" id="seq_btn_local">Alineamiento Local</button>
                 <button class="btn btn-primary" id="seq_btn_dotplot">Dotplot</button>
@@ -265,7 +271,7 @@
         }
     }
 </script>
-<script src="{% static 'js/app_align/choices.js' %}"></script>
 <py-script src="{% static 'py/fasta.py' %}"></py-script>
 {% block customjs %}
+<script src="{% static 'js/app_align/choices.js' %}"></script>
 {% endblock %}
