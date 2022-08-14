@@ -50,22 +50,34 @@
 {% block pagecontent %}
 <div class="text-center">
     <div class="alert alert-info">
-        <strong>¡Bienvenido!</strong> Cargue solo archivos con extension .fasta.<br>
-        <strong>¡Importante!</strong> Para el alineamiento local debe ingresar los valores en los slider.
+        <strong>¡Bienvenido!</strong>
+        <strong>¡Importante!</strong>, seleccione de acuerdo a su necesidad el alineamiento que desea realizar.
     </div>
 </div>
-<h1 class="text-primary text-center">FASTA</h1>
 <div class="row justify-content-center">
     <div class="col-md-5 mx-1">
-        <h2 class="text-primary text-center">Organismo 1</h2>
+        <h2 class="h3 text-primary text-center">Alineamiento</h2>
         <br>
-        <label for="FormControlFile1">Seleccione el organismo 1</label>
-        <select class="form-select" aria-label="Default select example" onChange="inner_id();" id="list_organism">
-            <option selected>Seleccione el organismo...</option>
-            {% for organism in organisms %}
-            <option value="{{ organism.sequence }}">{{ organism.identificator }} - {{ organism.name }}</option>
-            {% endfor %}
-        </select>
+        <div class="radio_1_container">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="manual_radio"
+                    value="option1">
+                <label class="form-check-label" for="manual_radio">Manual</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="fasta_radio" value="option2">
+                <label class="form-check-label" for="fasta_radio">Carga FASTA</label>
+            </div>
+        </div>
+        <div class="alert_select" id="alert_select">
+            <div class="alert alert-danger">
+                <strong>¡Importante!</strong> Seleccione una de las opciones.
+            </div>
+        </div>
+        <div class="input_cont">
+            <input class="form-control" type="text" placeholder="Ingrese la secuencia..." id="manual_input">
+            <input class="form-control" type="file" name="fasta" id="fasta_input" accept=".fasta">
+        </div>
         <br>
         <!--Alert sequence 2-->
         <div class="text-center">
@@ -75,10 +87,6 @@
                 <input class="form-control" type="text" id="seq_fasta1" value="Sin Datos" disabled>
             </div>
         </div>
-        <span class="multi-range">
-            <input type="range" min="1" max="59" value="1" id="lower_fasta1" disabled>
-            <input type="range" min="2" max="60" id="upper_fasta1" disabled>
-        </span>
         <br><br>
         <!--
         <label for="lower_fasta1">Valor minimo: </label>
@@ -88,40 +96,73 @@
         -->
     </div>
     <div class="col-md-5 mx-1">
-        <h2 class="text-primary text-center">Secuencia 2</h2>
+        <h2 class="h3 text-primary text-center">Configuracion del Alineamiento</h2>
         <br>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="Radios1" onChange="enable_disable();"
-                checked>
-            <label class="form-check-label" for="exampleRadios1">
-                Alineamiento Fasta
-                <br>
-                <label for="FormControlFile2">Ingrese el archivo 2</label>
-                <input type="file" id="fasta_2" accept=".fasta" class="form-control-file">
-            </label>
+        <div class="radio_2_container">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="bd_radio" value="option1">
+                <label class="form-check-label" for="bd_radio">Comparar con base de datos</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="seq_radio" value="option2">
+                <label class="form-check-label" for="seq_radio">Comparar con una secuencia</label>
+            </div>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="Radios2" onChange="enable_disable();">
-            <label class="form-check-label" for="exampleRadios2">
-                Alineamiento Manual
-                <br>
-                <label for="FormControlFile2">Ingrese manualmente la Secuencia</label>
-                <input class="form-control" type="text" id="seq_manual1" value="Sin Datos" disabled>
-            </label>
+        <div class="alert_select2" id="alert_select2">
+            <div class="alert alert-danger">
+                <strong>¡Importante!</strong> Seleccione una de las opciones.
+            </div>
         </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="Radios3" onChange="enable_disable();">
-            <label class="form-check-label" for="exampleRadios3">
-                Alineamiento Base de datos
-                <br>
+        <div id="bd_choice">
+            <div id="bd_slider">
+                <span class="multi-range">
+                    <input type="range" min="1" max="59" value="1" id="bd_slider1_min">
+                    <input type="range" min="2" max="60" id="bd_slider1_max">
+                </span>
+                <br><br>
+                <span class="multi-range">
+                    <input type="range" min="1" max="59" value="1" id="bd_slider2_min">
+                    <input type="range" min="2" max="60" id="bd_slider2_max">
+                </span>
+            </div>
+            <br><br><br>
+            <div class="justify-content-center" id="bd_buttons">
+                <button class="btn btn-primary" id="bd_btn_global">Alineamiento Global</button>
+                <button class="btn btn-primary" id="bd_btn_local">Alineamiento Local</button>
+            </div>
+        </div>
+        <br>
+        <div id="seq_choice">
+            <div id="seq_dropdown">
                 <select class="form-select" aria-label="Default select example" onChange="inner_ids();"
-                    id="list_organism2" disabled>
+                    id="list_organism2">
                     <option selected>Seleccione el organismo...</option>
                     {% for organism in organisms %}
-                    <option value="{{ organism.sequence }}">{{ organism.identificator }} - {{ organism.name }}</option>
+                    <option value="{{ organism.sequence }}">
+                        {{ organism.identificator }} - {{ organism.name }}
+                    </option>
                     {% endfor %}
                 </select>
-            </label>
+            </div>
+            <br>
+            <div id="seq_slider">
+                <span class="multi-range">
+                    <input type="range" min="1" max="59" value="1" id="seq_slider1_min">
+                    <input type="range" min="2" max="60" id="seq_slider1_max">
+                </span>
+                <br><br>
+                <span class="multi-range">
+                    <input type="range" min="1" max="59" value="1" id="seq_slider2_min">
+                    <input type="range" min="2" max="60" id="seq_slider2_max">
+                </span>
+            </div>
+            <br><br><br>
+            <div id="seq_buttons">
+                <button class="btn btn-primary" id="seq_btn_global">Alineamiento Global</button>
+                <button class="btn btn-primary" id="seq_btn_local">Alineamiento Local</button>
+                <button class="btn btn-primary" id="seq_btn_dotplot">Dotplot</button>
+                <button class="btn btn-primary" id="seq_btn_naw">Needleman and Wunsch</button>
+            </div>
         </div>
         <br>
         <div class="text-center">
@@ -131,34 +172,13 @@
                 <input class="form-control" type="text" id="seq_fasta2" value="Sin Datos" disabled>
             </div>
         </div>
-        <span class="multi-range">
-            <input type="range" min="1" max="59" value="1" id="lower_fasta2" disabled>
-            <input type="range" min="2" max="60" id="upper_fasta2" disabled>
-        </span>
         <br><br>
-        <!--
-        <label for="lower_fasta2">Valor minimo: </label>
-        <label class="first-range-value" for="lower_fasta2" id="labellower_fasta2">1</label>
-        <label for="upper">Valor maximo: </label>
-        <label class="last-range-value" for="upper_fasta2" id="labelupper_fasta2">60</label>
-        -->
-    </div>
-</div>
-<div class="row m-4 justify-content-center">
-    <div class="text-center mx-1">
-        <button class="btn btn-primary" id="global_aling_fasta" type="submit" pys-onClick="gl_aling_fasta">
-            Alineamiento
-            Global</button>
-        <button class="btn btn-primary" id="local_aling_fasta" pys-onClick="lc_aling_fasta">
-            Alineamiento
-            Local</button>
     </div>
 </div>
 
+<h2 class="h2 text-center text-primary">Resultados</h2>
 
-
-
-<h2 class="text-primary text-center">Resultado Global</h2>
+<h4 class="h4 text-primary text-center">Resultado Global</h4>
 <div class="table-responsive">
     <table class="table table-bordered text-center">
         <tr id="table_headfasta">
@@ -184,7 +204,7 @@
 <br><br>
 <div class="table-responsive" id="local_datafasta">
 </div>
-<h2 class="text-primary text-center">Resultado Local</h2>
+<h4 class="h4 text-primary text-center">Resultado Local</h4>
 <div class="table-responsive" id="result_local">
     <table class="table table-bordered text-center">
         <tr id="table_head_localfasta">
@@ -245,6 +265,7 @@
         }
     }
 </script>
+<script src="{% static 'js/app_align/choices.js' %}"></script>
 <py-script src="{% static 'py/fasta.py' %}"></py-script>
 {% block customjs %}
 {% endblock %}
