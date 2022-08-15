@@ -15,6 +15,7 @@ var alert_select2 = document.getElementById('alert_select2');
 // data
 var data1_input = document.getElementById('data1_input');
 var bd_choice = document.getElementById('bd_choice');
+var seq_choice = document.getElementById('seq_choice');
 
 // container
 var config_align_container = document.getElementById('config_align_container');
@@ -46,6 +47,7 @@ bd_radio.addEventListener('change', function () {
     if (bd_radio.checked) {
         alert_select2.style.display = 'none';
         bd_choice.style.display = 'block';
+        seq_choice.style.display = 'none';
         console.log('bd_radio');
     }
 });
@@ -54,6 +56,7 @@ seq_radio.addEventListener('change', function () {
     if (seq_radio.checked) {
         alert_select2.style.display = 'none';
         bd_choice.style.display = 'none';
+        seq_choice.style.display = 'block';
         console.log('seq_radio');
     }
 });
