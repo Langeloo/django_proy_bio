@@ -77,15 +77,16 @@
         </div>
         <div class="input_cont">
             <input class="form-control" type="text" placeholder="Ingrese la secuencia..." id="manual_input"
-                style="display:none;">
+                style="display:none;" maxlength="60">
             <input class="form-control" type="file" name="fasta" id="fasta_input" accept=".fasta" style="display:none;">
         </div>
         <br>
         <!--Alert sequence 2-->
         <div id="data1_input" style="display:none;">
             <div class="text-center">
-                <p id="data_label1"></p>
-                <div class="alert alert-success">
+                <div id="fasta_head"></div>
+                <div class="alert alert-info" id="manual_alert_input">
+                    <div class="text-danger" id="manual_alert_label"></div>
                     <h5>Secuencia:</h5>
                     <input class="form-control" type="text" id="data1_dinput" value="Sin Datos" disabled>
                 </div>
@@ -320,5 +321,6 @@
 {% block customjs %}
 <script src="{% static 'js/app_align/slider.js' %}"></script>
 <script src="{% static 'js/app_align/fasta.js' %}"></script>
+<script src="{% static 'js/app_align/manual_input.js' %}"></script>
 <script src="{% static 'js/app_align/choices.js' %}"></script>
 {% endblock %}
