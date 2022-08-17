@@ -133,9 +133,9 @@
             <br><br><br>
             <div class="text-center" id="bd_buttons">
                 <button class="btn btn-primary" id="bd_btn_global" data-bs-toggle="modal"
-                    data-bs-target="#resultajaxModal">Alineamiento Global</button>
+                    data-bs-target="#resultajaxModal" disabled>Alineamiento Global</button>
                 <button class="btn btn-primary" id="bd_btn_local" data-bs-toggle="modal"
-                    data-bs-target="#resultajaxModal">Alineamiento Local</button>
+                    data-bs-target="#resultajaxModal" disabled>Alineamiento Local</button>
             </div>
         </div>
         <br>
@@ -196,13 +196,17 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="resultajaxModalLabel">Resultados</h5>
+                <h5 class="modal-title" id="resultajaxModalLabel">Con base de datos</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <h2 class="h2 text-center text-primary">Resultados</h2>
-
-                <h4 class="h4 text-primary text-center">Aqui voy a cargar los datos desde BD por Ajax o Axios</h4>
+                <div id="modal_body_result">
+                    <div class="d-flex align-items-center">
+                        <strong>Loading...</strong>
+                        <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -317,10 +321,11 @@
         }
     }
 </script>
-<py-script src="{% static 'py/fasta.py' %}"></py-script>
 {% block customjs %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="{% static 'js/app_align/slider.js' %}"></script>
 <script src="{% static 'js/app_align/fasta.js' %}"></script>
 <script src="{% static 'js/app_align/manual_input.js' %}"></script>
 <script src="{% static 'js/app_align/choices.js' %}"></script>
+<script src="{% static 'js/app_align/bd_align.js' %}"></script>
 {% endblock %}
