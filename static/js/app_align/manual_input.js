@@ -2,6 +2,10 @@
 var manual_input = document.getElementById('manual_input');
 var fasta_input = document.getElementById('fasta_input');
 
+// buttons
+var bd_btn_global = document.getElementById('bd_btn_global');
+var bd_btn_local = document.getElementById('bd_btn_local');
+
 // labels & info
 //var data_label1 = document.getElementById('data_label1');
 var fasta_head = document.getElementById('fasta_head');
@@ -38,6 +42,7 @@ fasta_input.addEventListener('change', function (event) {
             seq = 'SINDATOS';
         }
         data1_dinput.value = seq;
+        ver_characters(seq.toUpperCase());
     };
     console.log('fasta_input');
 });
@@ -61,11 +66,15 @@ function ver_characters(seq){
         manual_alert_label.innerHTML = '';
         manual_alert_input.removeAttribute('class');
         manual_alert_input.setAttribute('class', 'alert alert-success');
+        bd_btn_global.disabled = false;
+        bd_btn_local.disabled = false;
     }
     else {
         manual_alert_label.innerHTML = 'Algunos caracteres no corresponden a una secuencia de ADN - ACTG';
         manual_alert_input.removeAttribute('class');
         manual_alert_input.setAttribute('class', 'alert alert-danger');
+        bd_btn_global.disabled = true;
+        bd_btn_local.disabled = true;
     }
     console.log(valid);
 }
