@@ -168,15 +168,17 @@
                 </span>
             </div>
             <br><br><br>
-            <div class="text-center" id="seq_buttons">
-                <button class="btn btn-primary" id="seq_btn_global" data-bs-toggle="modal"
-                    data-bs-target="#resultModal">Alineamiento Global</button>
-                <button class="btn btn-primary" id="seq_btn_local" data-bs-toggle="modal"
-                    data-bs-target="#resultModal">Alineamiento Local</button>
-                <button class="btn btn-primary" id="seq_btn_dotplot" data-bs-toggle="modal"
-                    data-bs-target="#resultModal">Dotplot</button>
-                <button class="btn btn-primary" id="seq_btn_naw" data-bs-toggle="modal"
-                    data-bs-target="#resultModal">Needleman and Wunsch</button>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-around" id="seq_buttons">
+                    <button class="btn btn-sm btn-primary" id="seq_btn_global" data-bs-toggle="modal"
+                        data-bs-target="#resultModal">Alineamiento Global</button>
+                    <button class="btn btn-sm btn-primary" id="seq_btn_local" data-bs-toggle="modal"
+                        data-bs-target="#resultModal">Alineamiento Local</button>
+                    <button class="btn btn-sm btn-primary" id="seq_btn_dotplot" data-bs-toggle="modal"
+                        data-bs-target="#resultModal">Dotplot</button>
+                    <button class="btn btn-sm btn-primary" id="seq_btn_naw" data-bs-toggle="modal"
+                        data-bs-target="#resultModal">N&W</button>
+                </div>
             </div>
             <br>
             <div class="text-center">
@@ -191,7 +193,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal BD -->
 <div class="modal fade" id="resultajaxModal" tabindex="-1" aria-labelledby="resultajaxModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -224,57 +226,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h2 class="h2 text-center text-primary">Resultados</h2>
+                <div class="container">
+                    <div class="row" id="modal_body_content">
 
-                <h1 class="h1">Aqui todo desde cliente, no es necesario peticiones raras.</h1>
-
-                <h4 class="h4 text-primary text-center">Resultado Global</h4>
-                <div class="table-responsive">
-                    <table class="table table-bordered text-center">
-                        <tr id="table_headfasta">
-                        </tr>
-                        <tr id="table_bodyfasta">
-                        </tr>
-                        <tr id="table_footerfasta">
-                        </tr>
-                    </table>
-                </div>
-                <br><br>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <h4 id="global_similarityfasta"></h4>
-                    </div>
-                    <div class="col-md-4">
-                        <h4 id="len1_seq1fasta"></h4>
-                    </div>
-                    <div class="col-md-4">
-                        <h4 id="len1_seq2fasta"></h4>
-                    </div>
-                </div>
-                <br><br>
-                <div class="table-responsive" id="local_datafasta">
-                </div>
-                <h4 class="h4 text-primary text-center">Resultado Local</h4>
-                <div class="table-responsive" id="result_local">
-                    <table class="table table-bordered text-center">
-                        <tr id="table_head_localfasta">
-                        </tr>
-                        <tr id="table_body_localfasta">
-                        </tr>
-                        <tr id="table_footer_localfasta">
-                        </tr>
-                    </table>
-                </div>
-                <br><br>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <h4 id="local_similarityfasta"></h4>
-                    </div>
-                    <div class="col-md-4">
-                        <h4 id="len2_seq1fasta"></h4>
-                    </div>
-                    <div class="col-md-4">
-                        <h4 id="len2_seq2fasta"></h4>
                     </div>
                 </div>
             </div>
