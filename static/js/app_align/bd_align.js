@@ -5,6 +5,12 @@ var bd_btn_local = document.getElementById('bd_btn_local');
 // modal body
 var modal_body_result = document.getElementById('modal_body_result');
 
+// sliders
+var bd_slider1_min = document.getElementById('bd_slider1_min');
+var bd_slider1_max = document.getElementById('bd_slider1_max');
+var bd_slider2_min = document.getElementById('bd_slider2_min');
+var bd_slider2_max = document.getElementById('bd_slider2_max');
+
 //data
 var seq_data = document.getElementById('data1_dinput');
 
@@ -50,13 +56,20 @@ function global_align(data) {
         var sequence = data[organism].sequence;
         var organism_name = '<h3 class="h3 text-primary text-center">' + identificator + ' - ' + name + '</h3><br>';
         modal_data += (organism_name + '' + align(seq_data.value, sequence));
-        console.log(modal_data);
     }
     modal_body_result.innerHTML = modal_data;
 }
 
 function local_align(data) {
-    console.log(data);
+    modal_data = '';
+    for (organism in data) {
+        var name = data[organism].name;
+        var identificator = data[organism].identificator;
+        var sequence = data[organism].sequence;
+        var organism_name = '<h3 class="h3 text-primary text-center">' + identificator + ' - ' + name + '</h3><br>';
+        modal_data += (organism_name + '' + align(seq_data.value.substring(bd_slider1_min.value, bd_slider1_max.value), sequence.substring(bd_slider2_min.value, bd_slider2_max.value)));
+    }
+    modal_body_result.innerHTML = modal_data;
 }
 
 function align(seq1, seq2) {
