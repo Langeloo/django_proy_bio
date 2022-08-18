@@ -118,17 +118,19 @@
         <div id="bd_choice" style="display: none;">
             <div id="bd_slider">
                 <span>Secuencia Cargada:</span>
+                <p>Min: <span id="bd_span1_min"></span> - Max: <span id="bd_span1_max"></span></p>
                 <br>
                 <span class="multi-range">
-                    <input type="range" min="1" max="59" value="1" id="bd_slider1_min">
-                    <input type="range" min="2" max="60" id="bd_slider1_max">
+                    <input onChange="update_labels();" type="range" min="1" max="59" value="1" id="bd_slider1_min">
+                    <input onChange="update_labels();" type="range" min="2" max="60" id="bd_slider1_max">
                 </span>
                 <br><br>
                 <span>Base de Datos:</span>
+                <p>Min: <span id="bd_span2_min"></span> - Max: <span id="bd_span2_max"></span></p>
                 <br>
                 <span class="multi-range">
-                    <input type="range" min="1" max="59" value="1" id="bd_slider2_min">
-                    <input type="range" min="2" max="60" id="bd_slider2_max">
+                    <input onChange="update_labels();" type="range" min="1" max="59" value="1" id="bd_slider2_min">
+                    <input onChange="update_labels();" type="range" min="2" max="60" id="bd_slider2_max">
                 </span>
             </div>
             <br><br><br>
@@ -155,17 +157,19 @@
             <br>
             <div id="seq_slider">
                 <span>Secuencia Cargada:</span>
+                <p>Min: <span id="seq_span1_min"></span> - Max: <span id="seq_span1_max"></span></p>
                 <br>
                 <span class="multi-range">
-                    <input type="range" min="1" max="59" value="1" id="seq_slider1_min">
-                    <input type="range" min="2" max="60" id="seq_slider1_max">
+                    <input onChange="update_labels();" type="range" min="1" max="59" value="1" id="seq_slider1_min">
+                    <input onChange="update_labels();" type="range" min="2" max="60" id="seq_slider1_max">
                 </span>
                 <br><br>
                 <span>Organismo Seleccionado:</span>
+                <p>Min: <span id="seq_span2_min"></span> - Max: <span id="seq_span2_max"></span></p>
                 <br>
                 <span class="multi-range">
-                    <input type="range" min="1" max="59" value="1" id="seq_slider2_min">
-                    <input type="range" min="2" max="60" id="seq_slider2_max">
+                    <input onChange="update_labels();" type="range" min="1" max="59" value="1" id="seq_slider2_min">
+                    <input onChange="update_labels();" type="range" min="2" max="60" id="seq_slider2_max">
                 </span>
             </div>
             <br><br><br>
@@ -284,4 +288,6 @@
 <script src="{% static 'js/app_align/choices.js' %}"></script>
 <script src="{% static 'js/app_align/bd_align.js' %}"></script>
 <script src="{% static 'js/app_align/dotplot.js' %}"></script>
+<script src="{% static 'js/app_align/slider_label.js' %}"></script>
+<script src="{% static 'js/app_align/global_local.js' %}"></script>
 {% endblock %}
